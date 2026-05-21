@@ -404,6 +404,6 @@ https://linkedin.com/in/ayushx69
 
 ---
 
-# ⭐ Final Notes
+#  Final Notes
 
 This project was built to combine multiple cybersecurity tools into a centralized dashboard for learning and practicing vulnerability assessment concepts in a safe and interactive environment.
