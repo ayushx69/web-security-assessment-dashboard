@@ -1,0 +1,126 @@
+body {
+    background-color: #0d0d0d;
+    color: #00ff00;
+    font-family: 'Courier New', Courier, monospace;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    margin-top: 50px;
+}
+
+/* Inputs */
+input[type="text"] {
+    width: 300px;
+    padding: 10px;
+    margin: 10px;
+    background-color: #1a1a1a;
+    border: 1px solid #00ff00;
+    color: #00ff00;
+}
+
+/* Button */
+button {
+    padding: 10px 20px;
+    background-color: #00ff00;
+    color: #0d0d0d;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+button:hover {
+    background-color: #00cc00;
+}
+
+/* Tool selection */
+.tool-selection {
+    margin-top: 15px;
+}
+
+.tool-selection label {
+    display: inline-block;
+    margin: 5px 10px;
+    color: #00ff00;
+    font-size: 14px;
+}
+
+/* Result box */
+.result-box {
+    background-color: #1a1a1a;
+    margin-top: 30px;
+    padding: 20px;
+    border: 1px solid #00ff00;
+    text-align: left;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+    overflow-x: auto;
+}
+
+/* Spinner (Top Right) */
+.spinner-small {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    display: none;
+    align-items: center;
+    gap: 10px;
+    background: #000;
+    padding: 10px 15px;
+    border: 1px solid #00ff00;
+    box-shadow: 0 0 10px #00ff00;
+    z-index: 9999;
+}
+
+.spinner-small span {
+    color: #00ff00;
+    font-size: 14px;
+}
+
+/* Spinner circle */
+.spinner {
+    width: 20px;
+    height: 20px;
+    border: 3px solid #0d0d0d;
+    border-top: 3px solid #00ff00;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+/* Animation */
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Output box */
+#output {
+    height: 450px;
+    overflow-y: auto;
+    background-color: #000;
+    color: #00ff00;
+    padding: 15px;
+    border: 1px solid #00ff00;
+    box-shadow: 0 0 15px #00ff00;
+    white-space: pre-wrap;
+}
+.download-btn {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 10px 18px;
+    background-color: #00ff00;
+    color: #000;
+    text-decoration: none;
+    font-weight: bold;
+    border: 1px solid #00ff00;
+    box-shadow: 0 0 12px #00ff00;
+}
+
+.download-btn:hover {
+    background-color: #00cc00;
+    box-shadow: 0 0 20px #00ff00;
+}

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Hacker Scanner Tool</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+
+    <div class="container">
+        <h1>Website Security Scanner</h1>
+
+        <form id="scanForm">
+            <input type="text" name="target_ip" placeholder="Enter Target IP / Domain" required>
+            <input type="text" name="target_url" placeholder="Enter URL for SQLMap/XSS (optional)">
+
+            <div class="tool-selection">
+                <label><input type="checkbox" name="tools" value="nmap" checked> Nmap</label>
+                <label><input type="checkbox" name="tools" value="nikto" checked> Nikto</label>
+                <label><input type="checkbox" name="tools" value="nuclei" checked> Nuclei</label>
+                <label><input type="checkbox" name="tools" value="wpscan"> WPScan (slow)</label>
+                <label><input type="checkbox" name="tools" value="sqlmap"> SQLMap</label>
+            </div>
+
+            <button type="submit">Start Scan</button>
+        </form>
+
+        <div id="loading" class="spinner-small" style="display: none;">
+            <div class="spinner"></div>
+            <span>Scanning...</span>
+        </div>
+
+        <div class="result-box">
+            <h2>Live Scan Output:</h2>
+            <pre id="output">Waiting for scan...</pre>
+        </div>
+
+        <a id="downloadBtn" href="/download-report" class="download-btn" style="display: none;">
+            Download Report
+        </a>
+    </div>
+
+    <script>
+        const form = document.getElementById("scanForm");
+        const output = document.getElementById("output");
+        const loading = document.getElementById("loading");
+        const downloadBtn = document.getElementById("downloadBtn");
+
+        form.addEventListener("submit", function(e) {
+            e.preventDefault();
+
+            output.textContent = "Starting scan...\n\n";
+            loading.style.display = "flex";
+            downloadBtn.style.display = "none";
+
+            const formData = new FormData(form);
+
+            fetch("/scan", {
+                method: "POST",
+                body: formData
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error("Server error: " + response.status);
+                }
+
+                const reader = response.body.getReader();
+                const decoder = new TextDecoder();
+
+                function readStream() {
+                    reader.read().then(({ done, value }) => {
+                        if (done) {
+                            loading.style.display = "none";
+                            output.textContent += "\n\n[✔] Scan Finished Successfully";
+                            downloadBtn.style.display = "inline-block";
+                            return;
+                        }
+
+                        const chunk = decoder.decode(value, { stream: true });
+                        output.textContent += chunk;
+                        output.scrollTop = output.scrollHeight;
+
+                        if (chunk.includes("Scan Completed.")) {
+                            loading.style.display = "none";
+                            downloadBtn.style.display = "inline-block";
+                        }
+
+                        readStream();
+                    });
+                }
+
+                readStream();
+            })
+            .catch(error => {
+                loading.style.display = "none";
+                output.textContent += "\n\n[ERROR] " + error.message;
+            });
+        });
+    </script>
+
+</body>
+</html>

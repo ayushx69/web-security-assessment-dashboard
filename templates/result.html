@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Scan Results</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+        .result-box {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 0 10px #ccc;
+            margin-bottom: 20px;
+        }
+        h2 {
+            color: #2c3e50;
+        }
+        pre {
+            background-color: #efefef;
+            padding: 10px;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>🔐 Website Scan Results</h1>
+
+    <div class="result-box">
+        <h2>Port Scan:</h2>
+        <pre>{{ port_result }}</pre>
+    </div>
+
+    <div class="result-box">
+        <h2>Nikto Scan:</h2>
+        <pre>{{ nikto_result }}</pre>
+    </div>
+
+    <div class="result-box">
+        <h2>OWASP ZAP Scan:</h2>
+        <pre>{{ zap_result }}</pre>
+    </div>
+
+    <div class="result-box">
+        <h2>SQL Injection Test:</h2>
+        <pre>{{ sqlmap_result }}</pre>
+    </div>
+
+    <div class="result-box">
+        <h2>XSS Test:</h2>
+        <pre>{{ xss_result }}</pre>
+    </div>
+
+    <div class="result-box">
+        <h2>Security Suggestions:</h2>
+        <pre>{{ suggestions }}</pre>
+    </div>
+
+</body>
+</html>
+
